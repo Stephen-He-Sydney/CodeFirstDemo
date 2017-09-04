@@ -1,0 +1,38 @@
+﻿<div class="modal fade" id="importSuccess" tabindex="-1" data-backdrop="static">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Successful data import</h4>
+            </div>
+            <div class="modal-body">
+            </div>
+            <div class="modal-footer no-border text-center">
+                <button id="redirectToIndex" type="button" class="btn btn-primary">OK</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="importFail" tabindex="-1" data-backdrop="static">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Fail to data import</h4>
+            </div>
+            <div class="modal-body">
+                <p class="info">
+                    Please make sure your database has been created at first!
+                </p>
+            </div>
+            <div class="modal-footer no-border text-center">
+                <button id="redirectToIndex" type="button" class="btn btn-primary">OK</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<h2>Admin</h2>
+<div ng-controller="migrateToDbController as vm">
+    @*ng-init="vm.init()">*@
+<button type="button" class="btn btn-primary" ng-click="vm.importData()">Import data</button>
+</div>

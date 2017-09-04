@@ -1,0 +1,55 @@
+﻿<br />
+
+<script type="text/ng-template" id="customPopupTemplate.html">
+    <div class="custom-popup-wrapper"
+         ng-style="{top: position().top+'px', left: position().left+'px'}"
+         style="display: block;"
+         ng-show="isOpen() && !moveInProgress"
+         aria-hidden="{{!isOpen()}}">
+
+        <ul class="dropdown-menu" role="listbox">
+            <li class="uib-typeahead-match" ng-repeat="match in matches track by $index" ng-class="{active: isActive($index) }"
+                ng-mouseenter="selectActive($index)" ng-click="selectMatch($index)" role="option" id="{{::match.id}}">
+                <div uib-typeahead-match index="$index" match="match" query="query" template-url="templateUrl"></div>
+            </li>
+        </ul>
+    </div>
+</script>
+
+<div class='form-group' ng-controller="searchController">
+    <div class="row col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <div class="row col-xs-6 col-sm-6 col-md-6 col-lg-6">
+            <h4>Search car makes</h4>
+            <input type="text" ng-model="selectedMake" placeholder="Search car makes"
+                   uib-typeahead="make.Name for make in getMakes($viewValue)"
+                   typeahead-loading="loadingCarMakes" typeahead-no-results="noMakeResults"
+                   typeahead-on-select="onSelectMake($item)"
+                   class="form-control">
+            <i ng-show="loadingCarMakes" class="glyphicon glyphicon-refresh"></i>
+            <div ng-show="noMakeResults">
+                <i class="glyphicon glyphicon-remove"></i> No Results Found
+            </div>
+        </div>
+
+        <div class="row col-xs-6 col-sm-6 col-md-6 col-lg-6">
+            <h4>Search Car models by selected car make</h4>
+            <input type="text" ng-model="selectedModel" placeholder="Search car makes"
+                   uib-typeahead="model.Name for model in getModels($viewValue)| filter:$viewValue"
+                   typeahead-loading="loadingModels" typeahead-no-results="noModelResults"
+                   typeahead-on-select="onSelectModel($item)"
+                   class="form-control">
+            <i ng-show="loadingModels" class="glyphicon glyphicon-refresh"></i>
+            <div ng-show="noModelResults">
+                <i class="glyphicon glyphicon-remove"></i> No Results Found
+            </div>
+        </div>
+    </div>
+
+    <!-- Tried aston-martin/vanquish/2014/oem/2014_aston-martin_vanquish_convertible_volante_fq_oem_1_1280.jpg with any possible base Url-->
+    <!--Unfortunately, No url can be loaded as a image-->
+    <div ng-repeat="aPhoto in photos" class="row col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <div ng-repeat="aSource in aPhoto.sources">
+            <img ng-src="{{aSource.link.href}}" />
+        </div>
+    </div>
+</div>
